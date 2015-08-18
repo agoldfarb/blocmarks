@@ -13,6 +13,13 @@ end
 
 users = User.all
 
+user = User.first
+user.skip_reconfirmation!
+user.update_attributes!(
+  email: 'allisonrgoldfarb@gmail.com',
+  password: 'helloworld'
+)
+
 10.times do
   Topic.create!(
     user: users.sample,
