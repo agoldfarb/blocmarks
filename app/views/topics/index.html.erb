@@ -7,13 +7,28 @@
         <div class="media-body">
           <h4 class="media-heading">
             <%= link_to topic.title, topic %>
-            <%= link_to "Delete", topic, method: :delete, data: { confirm: 'Are you sure you want to delete this topic?'} %>
+            <%= link_to "Delete", topic, method: :delete, data: { confirm: 'Are you sure you want to delete this topic?'} %> <br><br>
             <small>
               <% topic.bookmarks.each do |bookmark| %>
                 <div>
-                  <%= link_to bookmark.url, bookmark.url, :target => '_blank' %> <% if policy(bookmark).edit? %> | <%= link_to "Delete", [topic, bookmark], method: :delete %> | <%= link_to "Edit", edit_topic_bookmark_path(topic, bookmark) %>
+                  <%= link_to bookmark.url, bookmark.url, :target => '_blank' %>
+              <% if policy(Like.new).create? %>
+                <div class="like">
+                    <% if like = current_user.liked(bookmark) %>
+                      <%= link_to [topic, bookmark, like], method: :delete do %> 
+                      Unlike
+                      <% end %>
+                    <% else %>
+                      <%= link_to [topic, bookmark, Like.new], method: :post do %>
+                      Like
+                      <% end %>
+                    <% end %>
+                  </div>
+              <% end %>
+                  <% if policy(bookmark).edit? %> | <%= link_to "Delete", [topic, bookmark], method: :delete %> | <%= link_to "Edit", edit_topic_bookmark_path(topic, bookmark) %>
                   <% end %>
                 </div>
+                <br>
               <% end %>
             </small>
           </h4>
