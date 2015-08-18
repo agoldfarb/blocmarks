@@ -1,0 +1,8 @@
+<h1>New Bookmark</h1>
+<%= form_for [@topic, @bookmark] do |f| %>
+  <div class="form-group">
+    <%= f.label :url, "URL" %>
+    <%= f.text_field :url %>
+  </div>
+  <%= f.submit "Save", class: 'btn btn-success' %>
+<% end %>

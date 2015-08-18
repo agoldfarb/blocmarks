@@ -7,14 +7,13 @@
         <div class="media-body">
           <h4 class="media-heading">
             <%= link_to topic.title, topic %>
-              <br>
-              <br>
+            <%= link_to "Delete", topic, method: :delete, data: { confirm: 'Are you sure you want to delete this topic?'} %>
               <% topic.bookmarks.each do |bookmark| %>
                   <h6><%= link_to bookmark.url, bookmark.url, :target => '_blank' %></h6>
                   <br>
               <% end %>
           </h4>
+          <% end %>
         </div>
-      </div>
-    <% end %>
+    </div>
 </div>

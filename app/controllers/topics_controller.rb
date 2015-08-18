@@ -12,7 +12,6 @@ class TopicsController < ApplicationController
     @topic = Topic.new
   end
 
-
   def create
     @topic = Topic.new(params.require(:topic).permit(:title))
     @topic.user = current_user
@@ -51,6 +50,12 @@ class TopicsController < ApplicationController
        flash[:error] = "There was an error deleting the topic."
        render :show
      end
+  end
+
+  private
+
+  def topic_params
+    params.require(:topic).permit(:title)
   end
 end
 

@@ -52,3 +52,4 @@ end
 
 gem 'devise'
 gem 'bootstrap-sass'
+gem 'faker'

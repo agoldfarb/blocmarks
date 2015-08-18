@@ -13,13 +13,13 @@ class IncomingController < ApplicationController
      
 
     # Check if user is nil, if so, create and save a new user
-    if @user == nil
+    if @user.nil
       @user = User.new
       @user.email = params[:sender]
       @user.password = 'helloworld'
     end
     # Check if the topic is nil, if so, create and save a new topic
-    if @topic = nil
+    if @topic.nil
       @topic = Topic.new
       @topic.user_id = @user.id
       @topic.title = params[:subject]
