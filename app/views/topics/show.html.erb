@@ -7,14 +7,13 @@
 <div class="row">
   <div class="col-md-8">
     <% @bookmarks.each do |bookmark| %>  
-      <div class="media">
-        <div class="media-body">
-          <h4 class="media-heading">
-            <%= link_to bookmark.url, bookmark.url, :target => '_blank' %> 
+        <div>
+          <%= link_to bookmark.url, bookmark.url, :target => '_blank' %> 
+            <% if policy(bookmark).edit? %>
               <%= link_to "Edit", edit_topic_bookmark_path(@topic, bookmark), class: 'btn btn-success' %> 
               <%= link_to "Delete", bookmark.topic, method: :delete, class: 'btn btn-danger' %>
-          </h4>
+            <% end %>
         </div>
-      </div>
-    <% end %>
+      <% end %>
+    </div>
 </div>

@@ -8,10 +8,14 @@
           <h4 class="media-heading">
             <%= link_to topic.title, topic %>
             <%= link_to "Delete", topic, method: :delete, data: { confirm: 'Are you sure you want to delete this topic?'} %>
+            <small>
               <% topic.bookmarks.each do |bookmark| %>
-                  <h6><%= link_to bookmark.url, bookmark.url, :target => '_blank' %></h6>
-                  <br>
+                <div>
+                  <%= link_to bookmark.url, bookmark.url, :target => '_blank' %> <% if policy(bookmark).edit? %> | <%= link_to "Delete", [topic, bookmark], method: :delete %> | <%= link_to "Edit", edit_topic_bookmark_path(topic, bookmark) %>
+                  <% end %>
+                </div>
               <% end %>
+            </small>
           </h4>
           <% end %>
         </div>
