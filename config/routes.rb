@@ -11,6 +11,8 @@ Rails.application.routes.draw do
       resources :likes, only: [:create, :destroy, :show]
     end
   end
+
+  resources :users, only: [:show]
   
   post :incoming, to: 'incoming#create'
 

@@ -1,0 +1,13 @@
+<% @user_bookmarks.each do |b| %>
+  <h1>My Bookmarks</h1>
+  <% @user_bookmarks.each do |b| %>
+    <%= b.url %> <br>
+  <% end %>
+<% end %>
+<% if !@liked_bookmarks.empty? %>
+  <h1>Liked Bookmarks</h1>
+    <%= render partial: 'likes/like', locals: { bookmark: @bookmark } %>
+    <% @liked_bookmarks.each do |l| %>
+  <%= l.bookmark.url %> <br>
+  <% end %>
+<% end %>

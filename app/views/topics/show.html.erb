@@ -7,19 +7,7 @@
 <div class="row">
   <div class="col-md-8">
     <% @bookmarks.each do |bookmark| %>
-     <% if policy(Like.new).create? %>
-        <div class="like">
-        <% if like = current_user.liked(bookmark) %>
-          <%= link_to [@topic, bookmark, like], method: :delete do %> 
-          Unlike
-          <% end %>
-        <% else %>
-          <%= link_to [@topic, bookmark, Like.new], method: :post do %>
-          Like
-          <% end %>
-        <% end %>
-      </div>
-    <% end %>
+    <%= render partial: 'likes/like', locals: { bookmark: @bookmark } %>
         <div>
           <%= link_to bookmark.url, bookmark.url, :target => '_blank' %> 
             <% if policy(bookmark).edit? %>
