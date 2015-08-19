@@ -1,13 +1,10 @@
-<% @user_bookmarks.each do |b| %>
-  <h1>My Bookmarks</h1>
+<h1>My Bookmarks</h1>
   <% @user_bookmarks.each do |b| %>
-    <%= b.url %> <br>
+    <%= b.url %> <br> ( <%= link_to [b.topic, b], method: :delete do %> Remove <% end %> )
   <% end %>
-<% end %>
 <% if !@liked_bookmarks.empty? %>
   <h1>Liked Bookmarks</h1>
-    <%= render partial: 'likes/like', locals: { bookmark: @bookmark } %>
     <% @liked_bookmarks.each do |l| %>
-  <%= l.bookmark.url %> <br>
+  <%= l.bookmark.url %> (<%= link_to [l.bookmark.topic, l.bookmark, l], method: :delete do %> Unlike <% end %> )<br>
   <% end %>
 <% end %>

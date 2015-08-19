@@ -12,7 +12,19 @@
               <% topic.bookmarks.each do |bookmark| %>
                 <div>
                   <%= link_to bookmark.url, bookmark.url, :target => '_blank' %>
-                  <%= render partial: 'likes/like', locals: { bookmark: @bookmark } %>
+                  <% if policy(Like.new).create? %>
+                    <div class="like">
+                      <% if like = current_user.liked(bookmark) %>
+                        <%= link_to [topic, bookmark, like], method: :delete do %> 
+                        Unlike
+                        <% end %>
+                      <% else %>
+                        <%= link_to [topic, bookmark, Like.new], method: :post do %>
+                        Like
+                        <% end %>
+                      <% end %>
+                    </div>
+                    <% end %>
                   <% if policy(bookmark).edit? %> | <%= link_to "Delete", [topic, bookmark], method: :delete %> | <%= link_to "Edit", edit_topic_bookmark_path(topic, bookmark) %>
                   <% end %>
                 </div>
